@@ -13,7 +13,7 @@ def convertir_csv(df):
     processed_data = output.getvalue()
     return processed_data
 
-st.title("Filtro de CSV por COD_LOCALIDAD")
+st.title("Delete Info por Localidad")
 
 # Subir archivo
 uploaded_file = st.file_uploader("Carga tu archivo CSV", type=["csv"])
