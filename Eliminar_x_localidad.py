@@ -13,7 +13,7 @@ def convertir_csv(df):
     processed_data = output.getvalue()
     return processed_data
 
-st.title("Eliminar info por Localidad")
+st.title("Filtro de CSV por COD_LOCALIDAD")
 
 # Subir archivo
 uploaded_file = st.file_uploader("Carga tu archivo CSV", type=["csv"])
@@ -29,10 +29,13 @@ if uploaded_file is not None:
     # Convertir a CSV para descargar
     csv_data = convertir_csv(df_filtrado)
     
+    # Obtener el nombre original del archivo
+    original_filename = uploaded_file.name
+    
     # Botón de descarga
     st.download_button(
         label="Descargar CSV Filtrado",
         data=csv_data,
-        file_name="datos_filtrados.csv",
+        file_name=f"filtrado_{original_filename}",
         mime="text/csv"
     )
