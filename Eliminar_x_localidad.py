@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+import os
 
 def filtrar_csv(df):
     # Filtrar eliminando las filas donde COD_LOCALIDAD empieza con 13473 o 44430
@@ -13,7 +14,7 @@ def convertir_csv(df):
     processed_data = output.getvalue()
     return processed_data
 
-st.title("Delete Info por Localidad")
+st.title("Filtro de CSV por COD_LOCALIDAD")
 
 # Subir archivo
 uploaded_file = st.file_uploader("Carga tu archivo CSV", type=["csv"])
@@ -31,6 +32,15 @@ if uploaded_file is not None:
     
     # Obtener el nombre original del archivo
     original_filename = uploaded_file.name
+    
+    # Selector de directorio de guardado
+    save_path = st.text_input("Ingresa la ruta donde deseas guardar el archivo:")
+    
+    if save_path:
+        full_path = os.path.join(save_path, f"filtrado_{original_filename}")
+        with open(full_path, "wb") as f:
+            f.write(csv_data)
+        st.success(f"Archivo guardado en {full_path}")
     
     # Botón de descarga
     st.download_button(
