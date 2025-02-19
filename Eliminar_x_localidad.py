@@ -36,6 +36,6 @@ if uploaded_file is not None:
     st.download_button(
         label="Descargar CSV Filtrado",
         data=csv_data,
-        file_name=f"filtrado_{original_filename}",
+        file_name=f"{original_filename}",
         mime="text/csv"
     )
